@@ -1,8 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "../styles/App.css";
+import LinkList from "./LinkList";
 
 function App() {
-	return <div className="App">Hello World</div>;
+	return (
+		<Fragment>
+			<LinkList />
+		</Fragment>
+	);
 }
 
 export default App;
