@@ -5,6 +5,7 @@ import CreateLink from "./CreateLink";
 import Header from "./Header";
 import LinkList from "./LinkList";
 import Login from "./Login";
+import Search from "./Search";
 
 function App() {
 	return (
@@ -21,6 +22,9 @@ function App() {
 						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/search">
+							<Search />
 						</Route>
 					</Switch>
 				</div>
