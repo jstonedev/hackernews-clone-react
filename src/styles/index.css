@@ -32,7 +32,7 @@ input {
 	width: 85%;
 }
 
-button {
+.btn {
 	font-family: monospace;
 	font-size: 10pt;
 	color: black;

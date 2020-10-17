@@ -40,7 +40,11 @@ const CreateLink = ({ history }) => {
 				mutation={POST_MUTATION}
 				variables={{ description, url }}
 				onCompleted={() => history.push("/")}>
-				{(postMutation) => <button onClick={postMutation}>Submit</button>}
+				{(postMutation) => (
+					<button className="btn" onClick={postMutation}>
+						Submit
+					</button>
+				)}
 			</Mutation>
 		</div>
 	);
