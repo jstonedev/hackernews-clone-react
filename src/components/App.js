@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "../styles/App.css";
 import CreateLink from "./CreateLink";
 import Header from "./Header";
@@ -15,7 +15,7 @@ function App() {
 				<div className="ph3 pv1 background-gray">
 					<Switch>
 						<Route exact path="/">
-							<LinkList />
+							<Redirect to="/new/1" />
 						</Route>
 						<Route exact path="/create">
 							<CreateLink />
@@ -25,6 +25,12 @@ function App() {
 						</Route>
 						<Route exact path="/search">
 							<Search />
+						</Route>
+						<Route exact path="/top">
+							<LinkList />
+						</Route>
+						<Route exact path="/new/:page">
+							<LinkList />
 						</Route>
 					</Switch>
 				</div>
