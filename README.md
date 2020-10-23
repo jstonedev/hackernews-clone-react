@@ -1,68 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Hackernews Clone Application
 
-## Available Scripts
+This is a fullstack application built with ReactJS, Apollo(GraphQL) and Prisma(database)
 
-In the project directory, you can run:
+## How to use
 
-### `yarn start`
+### 1. Clone repository
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+git clone https://github.com/jstonedev/hackernews-clone-react
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 2. Install dependencies & Deploy the Prisma database API
 
-### `yarn test`
+To install the Prisma CLI globally with Yarn, use the following command:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+yarn global add prisma
+```
 
-### `yarn build`
+Also, run the following commands:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+cd hackernews-clone-react/server
+yarn install
+prisma deploy
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Then, follow these steps in the interactive CLI wizard:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Select **Demo server**
+1. **Authenticate** with Prisma Cloud in your browser (if necessary)
+1. Back in your terminal, **confirm all suggested values**
 
-### `yarn eject`
+<details>
+ <summary>Alternative: Run Prisma locally via Docker</summary>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Ensure you have Docker installed on your machine. If not, you can get it from [here](https://store.docker.com/search?offering=community&type=edition).
+1. Create `docker-compose.yml` for MySQL (see [here](https://www.prisma.io/docs/prisma-server/database-connector-POSTGRES-jgfr/) for Postgres):
+   ```yml
+   version: "3"
+   services:
+     prisma:
+       image: prismagraphql/prisma:1.23
+       restart: always
+       ports:
+         - "4466:4466"
+       environment:
+         PRISMA_CONFIG: |
+           port: 4466
+           databases:
+             default:
+               connector: mysql
+               host: mysql
+               port: 3306
+               user: root
+               password: prisma
+               migrations: true
+     mysql:
+       image: mysql:5.7
+       restart: always
+       environment:
+         MYSQL_ROOT_PASSWORD: prisma
+       volumes:
+         - mysql:/var/lib/mysql
+   volumes:
+     mysql:
+   ```
+1. Run `docker-compose up -d`
+1. Run `prisma deploy`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 3. Start the server
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To start the server, all you need to do is execute the `start` script by running the following command inside the `server` directory:
 
-## Learn More
+```sh
+yarn start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> **Note**: If you want to interact with the GraphQL API of the server inside a [GraphQL Playground](https://github.com/prisma/graphql-playground), you can navigate to [http://localhost:4000](http://localhost:4000).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. Run the app
 
-### Code Splitting
+Now that the server is running, you can start the React app as well. The commands need to be run in a new terminal tab/window inside the root directory `hackernews-clone-react` (because the current tab is blocked by the process running the server):
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```sh
+yarn install
+yarn start
+```
 
-### Analyzing the Bundle Size
+You can now open your browser and use the app on [http://localhost:3000](http://localhost:3000).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+---
 
-### Making a Progressive Web App
+## App Info
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Author
 
-### Advanced Configuration
+Jason Stone
+[Website](https://jstonedev.com)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Version
 
-### Deployment
+1.0.0
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### License
 
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the MIT License
