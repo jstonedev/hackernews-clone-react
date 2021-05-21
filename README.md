@@ -1,7 +1,5 @@
 # Hackernews Clone Application
 
-This is a fullstack application built with ReactJS, Apollo(GraphQL) and Prisma(database)
-
 ## How to use
 
 ### 1. Clone repository
